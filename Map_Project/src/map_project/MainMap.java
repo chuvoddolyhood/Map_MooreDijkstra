@@ -65,6 +65,9 @@ public class MainMap extends javax.swing.JFrame {
         //Lay thong tin so dinh, so cung
         getNumberOfVertextAndEdge();
         
+        
+        //show
+        showGraph();
     }
 
     /**
@@ -82,6 +85,7 @@ public class MainMap extends javax.swing.JFrame {
         cmbStart = new javax.swing.JComboBox<>();
         cmbEnd = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Map");
@@ -127,7 +131,18 @@ public class MainMap extends javax.swing.JFrame {
                 .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(btnRun)
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addContainerGap(600, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 71, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -138,18 +153,24 @@ public class MainMap extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(1568, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 1562, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 102, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,25 +190,89 @@ public class MainMap extends javax.swing.JFrame {
     //Chay thuat toan Dijkstra
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
 
+        showGraph();
+        
+    }//GEN-LAST:event_btnRunActionPerformed
+
+    private void showGraph(){
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
         g.setStroke(new BasicStroke(5f));
-        g.setColor(Color.GREEN);
-        g.drawLine(1472, 648, 1250, 453);
+        g.setColor(Color.BLUE);
+        
+        //1-Duong truoc Tram y te
+        g.drawLine(880, 224, 699, 512);
+        //2, 'Duong ke cong sau Khoa KHTN'
+        g.drawLine(880, 224, 1100, 403);
+        //3, 'Duong nha xe C1'
+        g.drawLine(1100, 403, 1199, 432);
+        //4, 'Vong xuyen 3'
+        g.drawLine(1199, 432, 1201, 457);
+        //5, 'Vong xuyen 2'
+        g.drawLine(1199, 432, 1240, 417);
+        //6, 'Vong xuyen 1'
+        g.drawLine(1240, 417, 1249, 460);
+        //7, 'Vong xuyen 4'
+        g.drawLine(1249, 460, 1201, 457);
+        //8, 'Duong truoc nha hoc C1'
+        g.drawLine(1201, 457, 1008, 709);
+        //9, 'Duong cong A giua LRC va Vuon Bang'
+        g.drawLine(1249, 460, 1445, 619);
+        //10, 'Duong truoc LRC va D2'
+        g.drawLine(1445, 619, 1250, 860);
+        //11, 'Duong tu cong A vao'
+        g.drawLine(1445, 619, 1480, 650);
+        //12, 'Duong tu cong B vao, truoc Nha dieu hanh'
+        g.drawLine(1250, 860, 1008, 709);
+        //13, 'Duong truoc bai xe Doan thanh nien'
+        g.drawLine(1008, 709, 875, 620);
+        //14, 'Duong thu 1 vao khoa CNTT&TT'
+        g.drawLine(875, 620, 848, 532);
+        //15, 'Duong truoc khoa CNTT&TT'
+        g.drawLine(875, 620, 765, 552);
+        //16, 'Duong thu 2 vao khoa CNTT&TT'
+        g.drawLine(848, 532, 765, 552);
+        //17, 'Duong truoc khoa Nong nghiep'
+        g.drawLine(765, 552, 699, 512);
+        
+        
+        
+        
         
         
         
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(10f));
-
-        g.drawOval(1472, 648, 10, 10);
-        
-        g.drawOval(1250, 453, 10, 10);
-
-        
-        
-        
-    }//GEN-LAST:event_btnRunActionPerformed
-
+        //Nút 1 nga 3 Nha thi dau va Gym
+        g.drawOval(880, 224, 10, 10);
+        //Nút 2 nha xe C1
+        g.drawOval(1100, 403, 10, 10);
+        //Nút 3 dinh vong xuyen 2 3
+        g.drawOval(1199, 432, 10, 10);
+        //Nút 4 dinh vong xuyen 1 2
+        g.drawOval(1240, 417, 10, 10);
+        //Nút 5 dinh vong xuyen 1 4
+        g.drawOval(1249, 460, 10, 10);
+        //Nút 6 dinh vong xuyen 3 4
+        g.drawOval(1201, 457, 10, 10);
+        //Nút 7 nha in sach DHCT
+        g.drawOval(1445, 619, 10, 10);
+        //Nút 8 Cong A
+        g.drawOval(1480, 650, 10, 10);
+        //Nút 9 phong bao ve cong B
+        g.drawOval(1250, 860, 10, 10);
+        //Nút 10 nga 3 truoc Hoi truong rua_nha VPD
+        g.drawOval(1008, 709, 10, 10);
+        //Nút 11 loi thu 1 vao khoa CNTT
+        g.drawOval(875, 620, 10, 10);
+        //Nút 12 khoa CNTT
+        g.drawOval(848, 532, 10, 10);
+        //Nút 13 loi thu 2 vao khoa CNTT
+        g.drawOval(765, 552, 10, 10);
+        //Nút 14 nga 3 khoa NN_B1
+        g.drawOval(699, 512, 10, 10);
+    }
+    
+    
     private void uploadInfoVertexFromDTB(){
         try{
             String queryFindPass="SELECT name_vertex FROM Vertex WHERE type_vertex=1;";
@@ -278,5 +363,6 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

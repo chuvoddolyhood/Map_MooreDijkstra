@@ -17,11 +17,11 @@
 13 12 51.03
 14 13 143.97
 
-Nút 1 nga 3 Nha thi dau va Gym (1055, 271)
-Nút 2 nha xe C1 (1324, 485)
-Nút 3 dinh vong xuyen 2 3 (1437, 518)
-Nút 4 dinh vong xuyen 1 2 (1492, 499)
-Nút 5 dinh vong xuyen 1 4 (1503, 551)
+Nút 1 nga 3 Nha thi dau va Gym (875, 224)
+Nút 2 nha xe C1 (1094, 397)
+Nút 3 dinh vong xuyen 2 3 (1195, 428)
+Nút 4 dinh vong xuyen 1 2 (1235, 412)
+Nút 5 dinh vong xuyen 1 4 (1250, 455)
 Nút 6 dinh vong xuyen 3 4 (1445, 551)
 Nút 7 nha in sach DHCT (1734, 746)
 Nút 8 Cong A (1775, 782)
