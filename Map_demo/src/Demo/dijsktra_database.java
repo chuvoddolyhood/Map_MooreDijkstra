@@ -59,12 +59,13 @@ public class dijsktra_database {
     }
     
     public void getInfoFromFile(){
-        int vertex_1 = 0;
-        int vertex_2 = 0;
-        float distance = 0f;
+        int vertex_1 = 0; //Nut 1
+        int vertex_2 = 0; //Nut 2
+        float distance = 0f; //Khoang cach
+        int two_way; //kiem tra duong 2 chieu
         
         try{
-            String queryFindPass="SELECT ID_vertex_1, ID_Vertex_2, distance FROM Edge;";
+            String queryFindPass="SELECT ID_vertex_1, ID_Vertex_2, distance, two_way FROM Edge;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890"; 
             Connection con=DriverManager.getConnection(dbURL);
@@ -76,8 +77,14 @@ public class dijsktra_database {
                 vertex_1 = rs.getInt("ID_vertex_1");
                 vertex_2 = rs.getInt("ID_vertex_2");
                 distance = rs.getFloat("distance");
-                matrix[vertex_1][vertex_2] = distance;
-                matrix[vertex_2][vertex_1] = distance;
+                two_way = rs.getInt("two_way");
+                if(two_way == 1){
+                    matrix[vertex_1][vertex_2] = distance;
+                    matrix[vertex_2][vertex_1] = distance;
+                } else {
+                    matrix[vertex_1][vertex_2] = distance;
+                }
+                
             }
         }catch(Exception ex){
             ex.printStackTrace();
@@ -144,16 +151,19 @@ public class dijsktra_database {
             System.out.print("\n");
 	}
         
+        int start = 2;
+        int end = 10;
         
-        map.Dijkstra(8);
-        System.out.println(pi[12]+"   ");
+        map.Dijkstra(start);
+        
+        System.out.println(pi[end]+"   ");
         
         
         
         //Duong di
 	int []path=new int[MAX]; //luu cac dinh tren duong di
 	int k=0; //so dinh cua duong di
-	int current = 12;
+	int current = end;
 	
 	while(current != -1){
 		path[k] = current;

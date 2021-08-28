@@ -1,0 +1,35 @@
+14 17
+1 14 190.27
+2 1 161.28
+3 2 56.14
+3 6 14.53
+4 3 25.88
+5 4 23.51
+6 5 25.37
+6 10 180.22
+7 5 144.79
+7 9 173.63
+8 7 29.00 
+9 10 162.06
+10 11 91.37
+11 12 52.76
+11 13 71.48
+13 12 51.03
+14 13 143.97
+
+Nút 1 nga 3 Nha thi dau va Gym (1055, 271)
+Nút 2 nha xe C1 (1324, 485)
+Nút 3 dinh vong xuyen 2 3 (1437, 518)
+Nút 4 dinh vong xuyen 1 2 (1492, 499)
+Nút 5 dinh vong xuyen 1 4 (1503, 551)
+Nút 6 dinh vong xuyen 3 4 (1445, 551)
+Nút 7 nha in sach DHCT (1734, 746)
+Nút 8 Cong A (1775, 782)
+Nút 9 phong bao ve cong B (1503, 1034) 
+Nút 10 nga 3 truoc Hoi truong rua_nha VPD (1214, 848)
+Nút 11 loi thu 1 vao khoa CNTT (1051, 739)
+Nút 12 khoa CNTT (1014, 640)
+Nút 13 loi thu 2 vao khoa CNTT (923, 657)
+Nút 14 nga 3 khoa NN_B1 (611, 842)
+
+
