@@ -187,5 +187,11 @@ SELECT ID_vertex_1, ID_Vertex_2, distance, two_way FROM Edge;
 
 
 --Vertex noi bat
-SELECT * FROM Vertex WHERE type_vertex=1;
+SELECT name_vertex FROM Vertex WHERE type_vertex=1;
+
+--Thong tin vertex
+SELECT * FROM Vertex
+
+
+
 
