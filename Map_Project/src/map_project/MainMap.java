@@ -203,7 +203,7 @@ public class MainMap extends javax.swing.JFrame {
         distance = md.run();
         setDistanceInLabel();
         
-
+//        drawPath();
     }//GEN-LAST:event_btnRunActionPerformed
     
     
@@ -245,8 +245,6 @@ public class MainMap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmbEndActionPerformed
 
-
-    
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         jLabel2.setIcon(new ImageIcon(new ImageIcon("").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
@@ -254,86 +252,6 @@ public class MainMap extends javax.swing.JFrame {
         jLabel2.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
-    
-    
-    private void showGraph(){
-        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-        g.setStroke(new BasicStroke(5f));
-        g.setColor(Color.BLUE);
-        
-        //1-Duong truoc Tram y te
-        g.drawLine(880, 224, 699, 512);
-        //2, 'Duong ke cong sau Khoa KHTN'
-        g.drawLine(880, 224, 1100, 403);
-        //3, 'Duong nha xe C1'
-        g.drawLine(1100, 403, 1199, 432);
-        //4, 'Vong xuyen 3'
-        g.drawLine(1199, 432, 1201, 457);
-        //5, 'Vong xuyen 2'
-        g.drawLine(1199, 432, 1240, 417);
-        //6, 'Vong xuyen 1'
-        g.drawLine(1240, 417, 1249, 460);
-        //7, 'Vong xuyen 4'
-        g.drawLine(1249, 460, 1201, 457);
-        //8, 'Duong truoc nha hoc C1'
-        g.drawLine(1201, 457, 1008, 709);
-        //9, 'Duong cong A giua LRC va Vuon Bang'
-        g.drawLine(1249, 460, 1445, 619);
-        //10, 'Duong truoc LRC va D2'
-        g.drawLine(1445, 619, 1250, 860);
-        //11, 'Duong tu cong A vao'
-        g.drawLine(1445, 619, 1480, 650);
-        //12, 'Duong tu cong B vao, truoc Nha dieu hanh'
-        g.drawLine(1250, 860, 1008, 709);
-        //13, 'Duong truoc bai xe Doan thanh nien'
-        g.drawLine(1008, 709, 875, 620);
-        //14, 'Duong thu 1 vao khoa CNTT&TT'
-        g.drawLine(875, 620, 848, 532);
-        //15, 'Duong truoc khoa CNTT&TT'
-        g.drawLine(875, 620, 765, 552);
-        //16, 'Duong thu 2 vao khoa CNTT&TT'
-        g.drawLine(848, 532, 765, 552);
-        //17, 'Duong truoc khoa Nong nghiep'
-        g.drawLine(765, 552, 699, 512);
-        
-        
-        
-        
-        
-        
-        
-        g.setColor(Color.red);
-        g.setStroke(new BasicStroke(10f));
-        //Nút 1 nga 3 Nha thi dau va Gym
-        g.drawOval(880, 224, 10, 10);
-        //Nút 2 nha xe C1
-        g.drawOval(1100, 403, 10, 10);
-        //Nút 3 dinh vong xuyen 2 3
-        g.drawOval(1199, 432, 10, 10);
-        //Nút 4 dinh vong xuyen 1 2
-        g.drawOval(1240, 417, 10, 10);
-        //Nút 5 dinh vong xuyen 1 4
-        g.drawOval(1249, 460, 10, 10);
-        //Nút 6 dinh vong xuyen 3 4
-        g.drawOval(1201, 457, 10, 10);
-        //Nút 7 nha in sach DHCT
-        g.drawOval(1445, 619, 10, 10);
-        //Nút 8 Cong A
-        g.drawOval(1480, 650, 10, 10);
-        //Nút 9 phong bao ve cong B
-        g.drawOval(1250, 860, 10, 10);
-        //Nút 10 nga 3 truoc Hoi truong rua_nha VPD
-        g.drawOval(1008, 709, 10, 10);
-        //Nút 11 loi thu 1 vao khoa CNTT
-        g.drawOval(875, 620, 10, 10);
-        //Nút 12 khoa CNTT
-        g.drawOval(848, 532, 10, 10);
-        //Nút 13 loi thu 2 vao khoa CNTT
-        g.drawOval(765, 552, 10, 10);
-        //Nút 14 nga 3 khoa NN_B1
-        g.drawOval(699, 512, 10, 10);
-    }
-    
     
     private void uploadInfoVertexFromDTB(){
         try{
@@ -360,11 +278,70 @@ public class MainMap extends javax.swing.JFrame {
     }
     
     
-//    int []path = new int[200];
-//    //Lay duong di
-//    void public getPath(int []path){
-//        
-//    }
+    int []path_vertex = new int[200]; //Duong di qua cac nut
+    int number_vertex_path; //So nut
+    //Lay duong di
+    public void getPath(int []path, int number_vertex_path){
+        this.number_vertex_path= number_vertex_path;
+        int i;
+        for(i=0;i<number_vertex_path;i++){
+            path_vertex[i]=path[i];
+        }
+        
+//        for(i=number_vertex_path-1;i>=0;i--){
+//            System.out.print(path_vertex[i]+"    ");
+//        }
+        getCoordinateOfPath();
+    }
+    
+    int []coordinates_vertex_path = new int[200];
+    int j=0; //Luu so luong toa do (x,y) cua cac dinh
+    public void getCoordinateOfPath(){
+        int i;
+        for(i=number_vertex_path-1;i>=0;i--){
+            System.out.print(path_vertex[i]+"    ");
+            
+            
+            Controller_Map map = new Controller_Map();
+            map.getIDVertex_Path(path_vertex[i]);
+            String coordinateXY_Path = map.getCoordinateVertex_Path();
+//            System.out.println(coordinateXY_Path);
+            
+            int coordinateX_vertex_Path = Integer.parseInt(coordinateXY_Path.substring(0, coordinateXY_Path.lastIndexOf(" ")));
+            int coordinateY_vertex_Path = Integer.parseInt(coordinateXY_Path.substring(coordinateXY_Path.lastIndexOf(" ")+1));
+            System.out.println(coordinateX_vertex_Path+"<>"+coordinateY_vertex_Path);
+            
+
+            coordinates_vertex_path[j++] = coordinateX_vertex_Path;
+            coordinates_vertex_path[j++] = coordinateY_vertex_Path;
+        }
+        
+        drawPath();
+        
+    }
+    
+    void drawPath(){
+        int i;
+        for(i=0; i<j; i++){
+            System.out.print(coordinates_vertex_path[i]+"     ");
+        }
+        
+//        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+//            g.setStroke(new BasicStroke(5f));
+//            g.setColor(Color.BLUE);
+//        g.drawLine(1480, 650, 
+//                    1445, 619);
+        
+        for(i=0;i<j;i=i+4){
+            int j=i;
+            Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+            g.setStroke(new BasicStroke(5f));
+            g.setColor(Color.BLUE);
+            g.drawLine(coordinates_vertex_path[j], coordinates_vertex_path[j+1], 
+                    coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
+        }
+        
+    }
     
     /**
      * @param args the command line arguments

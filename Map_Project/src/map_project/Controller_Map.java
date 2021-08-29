@@ -81,4 +81,38 @@ public class Controller_Map {
         getCoordinateVertexEnd();
         return idVertexEnd+":"+coordinateX_vertexEnd +" "+ coordinateY_vertexEnd;
     }
+    
+    
+    //Nhan du lieu ID_vertex tu MainMap
+    int id_vertex;
+    void getIDVertex_Path(int index){
+        id_vertex = index;
+    }
+    
+    int coordinateX_vertex_Path;
+    int coordinateY_vertex_Path;
+    //Lay toa do tu cac diem tren path
+    String getCoordinateVertex_Path(){
+        try{
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String queryFindPass="SELECT coordinates_x, coordinates_y FROM Vertex WHERE ID_vertex=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(queryFindPass);
+            ps.setInt(1, id_vertex);
+            ResultSet rs=ps.executeQuery();
+            
+            if(rs.next()){
+                coordinateX_vertex_Path=rs.getInt("coordinates_x");
+                coordinateY_vertex_Path=rs.getInt("coordinates_y");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return coordinateX_vertex_Path+" "+coordinateY_vertex_Path;
+    }
+    
+    
+    
+    
 }

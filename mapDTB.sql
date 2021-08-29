@@ -200,12 +200,14 @@ UPDATE Vertex SET coordinates_x=699, coordinates_y=512 WHERE ID_vertex=14;
 SELECT ID_vertex, coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = 'Cong A'
 
 
+SELECT COUNT(*) AS so_cung FROM Edge;
+SELECT COUNT(*) AS so_dinh FROM Vertex;
 
 
 
 
-
-
+--Lay toa do tu ID_vertex
+SELECT coordinates_x, coordinates_y FROM Vertex WHERE ID_vertex=8
 
 
 

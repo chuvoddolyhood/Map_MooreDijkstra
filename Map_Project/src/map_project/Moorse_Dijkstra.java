@@ -40,7 +40,7 @@ public class Moorse_Dijkstra {
             ex.printStackTrace();
         }
 
-        System.out.println("so dinh= "+number_vertex);
+//        System.out.println("so dinh= "+number_vertex);
     }
     
      //Doc du lieu Edge
@@ -60,7 +60,7 @@ public class Moorse_Dijkstra {
             ex.printStackTrace();
         }
 
-        System.out.println("so cung= "+number_edge);
+//        System.out.println("so cung= "+number_edge);
     }
     
     public void getInfoFromFile(){
@@ -132,7 +132,7 @@ public class Moorse_Dijkstra {
 		}
 		
 		mark[i]=1; //da xet xong!!!
-		System.out.println(p[i]+"     "+ i);
+//		System.out.println(p[i]+"     "+ i);
 		
 		for(j=1;j<=number_vertex;j++){
 			if(matrix[i][j]!=0&&mark[j]==0){
@@ -156,20 +156,26 @@ public class Moorse_Dijkstra {
     
     //Duong di tu start -> end
     public int []path=new int[MAX]; //luu cac dinh tren duong di
+    public int k; //so dinh cua duong di
     public void path(){
-	int k=0; //so dinh cua duong di
 	int current = endVertex;
-	
+	k=0;
 	while(current != -1){
 		path[k] = current;
 		k++;
 		current = p[current];
 	}
 	
-	int r;
-	for(r= k-1 ; r>=0 ; r--){
-		System.out.print(path[r]+"     ");
-	}
+//	int r;
+//	for(r= k-1 ; r>=0 ; r--){
+//		System.out.print(path[r]+"     ");
+//	}
+    }
+    
+    //Chuyen du lieu []path qua MainMap
+    public void route(){
+        MainMap map = new MainMap();
+        map.getPath(path, k);
     }
     
     public float run(){
@@ -179,13 +185,13 @@ public class Moorse_Dijkstra {
         getInfoFromFile();
         
         //In bang
-	int a, b; //Bien ho tro tao bang
-	for(a=1; a<=number_vertex; a++){
-            for(b=1;b<=number_vertex;b++){
-		System.out.print(matrix[a][b]+"           ");
-            }
-            System.out.print("\n");
-	}
+//	int a, b; //Bien ho tro tao bang
+//	for(a=1; a<=number_vertex; a++){
+//            for(b=1;b<=number_vertex;b++){
+//		System.out.print(matrix[a][b]+"           ");
+//            }
+//            System.out.print("\n");
+//	}
         
         
         
@@ -195,14 +201,11 @@ public class Moorse_Dijkstra {
         
         //Duong di
 	path();
-        
+        route();
 
 
         return pi[endVertex];
     }
     
-//    public void route(){
-//        MainMap map = new MainMap();
-//        map.getPath(path);
-//    }
+
 }
