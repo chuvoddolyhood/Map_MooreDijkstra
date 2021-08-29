@@ -204,6 +204,18 @@ public class MainMap extends javax.swing.JFrame {
         setDistanceInLabel();
         
 //        drawPath();
+
+        System.out.print(j);
+        
+        int i;
+        for(i=0;i<j-2;i=i+2){
+            int j=i;
+            Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+            g.setStroke(new BasicStroke(5f));
+            g.setColor(Color.BLUE);
+            g.drawLine(coordinates_vertex_path[j], coordinates_vertex_path[j+1], 
+                    coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
+        }
     }//GEN-LAST:event_btnRunActionPerformed
     
     
@@ -250,6 +262,8 @@ public class MainMap extends javax.swing.JFrame {
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
                 .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setText("");
+        cmbStart.setSelectedIndex(1);
+        cmbEnd.setSelectedIndex(1);
     }//GEN-LAST:event_btnClearActionPerformed
 
     
@@ -294,8 +308,8 @@ public class MainMap extends javax.swing.JFrame {
         getCoordinateOfPath();
     }
     
-    int []coordinates_vertex_path = new int[200];
-    int j=0; //Luu so luong toa do (x,y) cua cac dinh
+    static int []coordinates_vertex_path = new int[200];
+    static int j=0; //Luu so luong toa do (x,y) cua cac dinh
     public void getCoordinateOfPath(){
         int i;
         for(i=number_vertex_path-1;i>=0;i--){
@@ -332,14 +346,6 @@ public class MainMap extends javax.swing.JFrame {
 //        g.drawLine(1480, 650, 
 //                    1445, 619);
         
-        for(i=0;i<j;i=i+4){
-            int j=i;
-            Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-            g.setStroke(new BasicStroke(5f));
-            g.setColor(Color.BLUE);
-            g.drawLine(coordinates_vertex_path[j], coordinates_vertex_path[j+1], 
-                    coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
-        }
         
     }
     
