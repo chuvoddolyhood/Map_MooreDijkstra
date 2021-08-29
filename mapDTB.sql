@@ -71,7 +71,6 @@ INSERT INTO Vertex VALUES (12, 'Khoa CNTT', 1, 1014, 640, 1);
 INSERT INTO Vertex VALUES (13, 'Loi thu 2 vao khoa CNTT&TT', 0, 923, 657, 1);
 INSERT INTO Vertex VALUES (14, 'Nga 3 khoa NN_B1', 0, 611, 842, 1);
 
-
 --Edge
 DELETE FROM Edge
 
@@ -191,6 +190,22 @@ SELECT name_vertex FROM Vertex WHERE type_vertex=1;
 
 --Thong tin vertex
 SELECT * FROM Vertex
+
+
+--Chinh sua thong tin toa do Vertex
+UPDATE Vertex SET coordinates_x=699, coordinates_y=512 WHERE ID_vertex=14;
+
+
+--Get toa do tu name_vertex
+SELECT coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = 'Nha xe C1'
+
+
+
+
+
+
+
+
 
 
 

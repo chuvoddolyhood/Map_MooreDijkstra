@@ -6,43 +6,23 @@
 package map_project;
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Tran Nhan Nghia
  */
 public class MainMap extends javax.swing.JFrame {
-//    private static final String UP_IMG_PATH = "https://upload.wikimedia.org/wikipedia/commons/7/7d/Green_circle_icon.jpg";
-//    private static final String DN_IMG_PATH = "https://upload.wikimedia.org/wikipedia/commons/b/bc/Red_circle_icon.jpg";
-//    private Point upPt = new Point(300, 100);
-//    private Point dnPt = new Point(700, 650);
-//    private BufferedImage upImg, dnImg;
 
     /**
      * Creates new form MainMap
@@ -66,8 +46,6 @@ public class MainMap extends javax.swing.JFrame {
         getNumberOfVertextAndEdge();
         
         
-        //show
-        showGraph();
     }
 
     /**
@@ -85,6 +63,7 @@ public class MainMap extends javax.swing.JFrame {
         cmbStart = new javax.swing.JComboBox<>();
         cmbEnd = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,8 +76,18 @@ public class MainMap extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         cmbStart.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbStartActionPerformed(evt);
+            }
+        });
 
         cmbEnd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEndActionPerformed(evt);
+            }
+        });
 
         btnRun.setText("Run");
         btnRun.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +95,8 @@ public class MainMap extends javax.swing.JFrame {
                 btnRunActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,6 +112,10 @@ public class MainMap extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addComponent(btnRun)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +126,9 @@ public class MainMap extends javax.swing.JFrame {
                 .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(btnRun)
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addGap(136, 136, 136)
+                .addComponent(jLabel1)
+                .addContainerGap(443, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -190,10 +187,41 @@ public class MainMap extends javax.swing.JFrame {
     //Chay thuat toan Dijkstra
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
 
-        showGraph();
-        
+//        showGraph();
+
     }//GEN-LAST:event_btnRunActionPerformed
 
+
+    int coordinateX_vertexStart, coordinateY_vertexStart; //Toa do diem bat dau
+    int coordinateX_vertexEnd, coordinateY_vertexEnd; //Toa do diem ket thuc
+    private void cmbStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStartActionPerformed
+        Controller_Map map = new Controller_Map();
+        map.getInfoVertexStartFromComboBox(cmbStart.getItemAt(cmbStart.getSelectedIndex()));
+        String coordinateXY_vertexStart = map.outputCoordinateVertexStart();
+        coordinateX_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(0, coordinateXY_vertexStart.lastIndexOf(" ")));
+        coordinateY_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(coordinateXY_vertexStart.lastIndexOf(" ")+1));
+        
+        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+        g.setColor(Color.red);
+        g.setStroke(new BasicStroke(10f));
+        g.drawOval(coordinateX_vertexStart, coordinateY_vertexStart, 10, 10);
+    }//GEN-LAST:event_cmbStartActionPerformed
+    
+    private void cmbEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEndActionPerformed
+        Controller_Map map = new Controller_Map();
+        map.getInfoVertexEndFromComboBox(cmbEnd.getItemAt(cmbEnd.getSelectedIndex()));
+        String coordinateXY_vertexEnd = map.outputCoordinateVertexEnd();
+        coordinateX_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(0, coordinateXY_vertexEnd.lastIndexOf(" ")));
+        coordinateY_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(" ")+1));
+        
+        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+        g.setColor(Color.red);
+        g.setStroke(new BasicStroke(10f));
+        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
+    }//GEN-LAST:event_cmbEndActionPerformed
+
+    
+    
     private void showGraph(){
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
         g.setStroke(new BasicStroke(5f));
@@ -360,6 +388,7 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JButton btnRun;
     private javax.swing.JComboBox<String> cmbEnd;
     private javax.swing.JComboBox<String> cmbStart;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
