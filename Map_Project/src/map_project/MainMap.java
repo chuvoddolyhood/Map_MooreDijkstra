@@ -43,7 +43,7 @@ public class MainMap extends javax.swing.JFrame {
         uploadInfoVertexFromDTB();
         
         //Lay thong tin so dinh, so cung
-        getNumberOfVertextAndEdge();
+//        getNumberOfVertextAndEdge();
         
         
     }
@@ -63,7 +63,8 @@ public class MainMap extends javax.swing.JFrame {
         cmbStart = new javax.swing.JComboBox<>();
         cmbEnd = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
+        lblDistance = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,7 +97,14 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        lblDistance.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,8 +121,10 @@ public class MainMap extends javax.swing.JFrame {
                 .addComponent(btnRun)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel1)
+                .addGap(98, 98, 98)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDistance)
+                    .addComponent(btnClear))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,9 +136,11 @@ public class MainMap extends javax.swing.JFrame {
                 .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(btnRun)
-                .addGap(136, 136, 136)
-                .addComponent(jLabel1)
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addGap(96, 96, 96)
+                .addComponent(btnClear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                .addComponent(lblDistance)
+                .addGap(178, 178, 178))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -186,19 +198,27 @@ public class MainMap extends javax.swing.JFrame {
 
     //Chay thuat toan Dijkstra
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-
-//        showGraph();
+        Moorse_Dijkstra md = new Moorse_Dijkstra();
+        md.getStartVertex_EndVertex(idVertexStart, idVertexEnd);
+        distance = md.run();
+        setDistanceInLabel();
+        
 
     }//GEN-LAST:event_btnRunActionPerformed
+    
+    
 
-
+    int idVertexStart, idVertexEnd; //id 2 diem
     int coordinateX_vertexStart, coordinateY_vertexStart; //Toa do diem bat dau
     int coordinateX_vertexEnd, coordinateY_vertexEnd; //Toa do diem ket thuc
+    float distance; //Duong di ngan nhat 2 diem
+    
     private void cmbStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStartActionPerformed
         Controller_Map map = new Controller_Map();
         map.getInfoVertexStartFromComboBox(cmbStart.getItemAt(cmbStart.getSelectedIndex()));
         String coordinateXY_vertexStart = map.outputCoordinateVertexStart();
-        coordinateX_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(0, coordinateXY_vertexStart.lastIndexOf(" ")));
+        idVertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(0, coordinateXY_vertexStart.lastIndexOf(":")));
+        coordinateX_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(coordinateXY_vertexStart.lastIndexOf(":")+1, coordinateXY_vertexStart.lastIndexOf(" ")));
         coordinateY_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(coordinateXY_vertexStart.lastIndexOf(" ")+1));
         
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
@@ -211,14 +231,28 @@ public class MainMap extends javax.swing.JFrame {
         Controller_Map map = new Controller_Map();
         map.getInfoVertexEndFromComboBox(cmbEnd.getItemAt(cmbEnd.getSelectedIndex()));
         String coordinateXY_vertexEnd = map.outputCoordinateVertexEnd();
-        coordinateX_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(0, coordinateXY_vertexEnd.lastIndexOf(" ")));
+        idVertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(0, coordinateXY_vertexEnd.lastIndexOf(":")));
+        coordinateX_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(":")+1, coordinateXY_vertexEnd.lastIndexOf(" ")));
         coordinateY_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(" ")+1));
         
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(10f));
         g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
+//        g.fillOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 25, 25);
+
+//        g.drawLine(coordinateX_vertexStart, coordinateY_vertexStart, coordinateX_vertexEnd, coordinateY_vertexEnd);
+        
     }//GEN-LAST:event_cmbEndActionPerformed
+
+
+    
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        jLabel2.setIcon(new ImageIcon(new ImageIcon("").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
+        jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
+                .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
+        jLabel2.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
 
     
     
@@ -320,34 +354,17 @@ public class MainMap extends javax.swing.JFrame {
         }
     }
     
-    int number_edge, number_vertex;
-    //Doc du lieu Vertex va Edge
-    public void getNumberOfVertextAndEdge(){
-        try{
-            String queryFindPass="SELECT COUNT(*) AS so_cung, MAX(ID_Vertex_1) AS so_dinh FROM Edge;";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890"; 
-            Connection con=DriverManager.getConnection(dbURL);
-            PreparedStatement ps=con.prepareStatement(queryFindPass);
-    //        ps.setString(1, userName);
-            ResultSet rs=ps.executeQuery();
-            
-            if(rs.next()){
-                number_edge=rs.getInt("so_cung");
-                number_vertex=rs.getInt("so_dinh");
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        
-        System.out.println("so cung= "+number_edge);
-        System.out.println("so dinh= "+number_vertex);
+  
+    void setDistanceInLabel(){
+        lblDistance.setText(String.valueOf(distance)+" m");
     }
-
-    
-
     
     
+//    int []path = new int[200];
+//    //Lay duong di
+//    void public getPath(int []path){
+//        
+//    }
     
     /**
      * @param args the command line arguments
@@ -385,13 +402,14 @@ public class MainMap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRun;
     private javax.swing.JComboBox<String> cmbEnd;
     private javax.swing.JComboBox<String> cmbStart;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblDistance;
     // End of variables declaration//GEN-END:variables
 }

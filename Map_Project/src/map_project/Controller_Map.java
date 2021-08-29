@@ -15,6 +15,8 @@ import java.sql.ResultSet;
  * @author Tran Nhan Nghia
  */
 public class Controller_Map {
+    int idVertexStart; //id cua dinh bat dau
+    int idVertexEnd; //id cua dinh ket thuc
     public String name_vertexStart; //Ten diem bat dau
     public String name_vertexEnd; //Ten diem ket thuc
     int coordinateX_vertexStart, coordinateY_vertexStart; //Toa do diem bat dau
@@ -33,13 +35,14 @@ public class Controller_Map {
         try{
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String queryFindPass="SELECT coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = ?";
+            String queryFindPass="SELECT ID_vertex, coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = ?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(queryFindPass);
             ps.setString(1, name_vertexStart);
             ResultSet rs=ps.executeQuery();
             
             if(rs.next()){
+                idVertexStart = rs.getInt("ID_vertex");
                 coordinateX_vertexStart=rs.getInt("coordinates_x");
                 coordinateY_vertexStart=rs.getInt("coordinates_y");
             }
@@ -50,7 +53,7 @@ public class Controller_Map {
     
     public String outputCoordinateVertexStart(){
         getCoordinateVertexStart();
-        return coordinateX_vertexStart +" "+ coordinateY_vertexStart;
+        return idVertexStart+":"+coordinateX_vertexStart +" "+ coordinateY_vertexStart;
     }
 
     
@@ -58,13 +61,14 @@ public class Controller_Map {
         try{
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String queryFindPass="SELECT coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = ?";
+            String queryFindPass="SELECT ID_vertex, coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = ?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(queryFindPass);
             ps.setString(1, name_vertexEnd);
             ResultSet rs=ps.executeQuery();
             
             if(rs.next()){
+                idVertexEnd = rs.getInt("ID_vertex");
                 coordinateX_vertexEnd=rs.getInt("coordinates_x");
                 coordinateY_vertexEnd=rs.getInt("coordinates_y");
             }
@@ -75,8 +79,6 @@ public class Controller_Map {
     
     public String outputCoordinateVertexEnd(){
         getCoordinateVertexEnd();
-        return coordinateX_vertexEnd +" "+ coordinateY_vertexEnd;
+        return idVertexEnd+":"+coordinateX_vertexEnd +" "+ coordinateY_vertexEnd;
     }
-    
-    
 }

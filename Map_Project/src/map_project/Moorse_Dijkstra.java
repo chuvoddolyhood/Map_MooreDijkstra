@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Demo;
+package map_project;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,48 +14,53 @@ import java.sql.ResultSet;
  *
  * @author Tran Nhan Nghia
  */
-public class dijsktra_database {
+public class Moorse_Dijkstra {
     private static final int MAX = 100;
-    private static final float INFINITY = 999999;
+    private static final float INFINITY = 999999f;
     static int number_edge = 0; //so cung 
     static int number_vertex = 0; //so dinh
     static float [][] matrix = new float [MAX][MAX]; //ma tran
+    int startVertex = 8;
+    int endVertex = 12;
     
-    public dijsktra_database(){
-        
-    }
-    
-    //Doc du lieu Vertex va Edge
-    public void getNumberOfVertextAndEdge(){
+    //Doc du lieu Vertex
+    public void getNumberOfVertex(){
         try{
-            String queryFindPass="SELECT COUNT(*) AS so_cung, MAX(ID_Vertex_1) AS so_dinh FROM Edge;";
+            String queryFindPass="SELECT COUNT(*) AS so_dinh FROM Vertex;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890"; 
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(queryFindPass);
-    //        ps.setString(1, userName);
             ResultSet rs=ps.executeQuery();
             
             if(rs.next()){
-                number_edge=rs.getInt("so_cung");
                 number_vertex=rs.getInt("so_dinh");
             }
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        
-        System.out.println("so cung= "+number_edge);
+
         System.out.println("so dinh= "+number_vertex);
     }
     
-    //Tao bang
-    public void createMatrix(){
-        int i, j;
-	for(i=1;i<=number_vertex;i++){
-            for(j=1;j<=number_vertex;j++){
-                matrix[i][j]=0;
+     //Doc du lieu Edge
+    public void getNumberOfEdge(){
+        try{
+            String queryFindPass="SELECT COUNT(*) AS so_cung FROM Edge;";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890"; 
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(queryFindPass);
+            ResultSet rs=ps.executeQuery();
+            
+            if(rs.next()){
+                number_edge=rs.getInt("so_cung");
             }
-	}
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        System.out.println("so cung= "+number_edge);
     }
     
     public void getInfoFromFile(){
@@ -70,7 +75,6 @@ public class dijsktra_database {
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890"; 
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(queryFindPass);
-    //        ps.setString(1, userName);
             ResultSet rs=ps.executeQuery();
             
             while(rs.next()){
@@ -91,7 +95,15 @@ public class dijsktra_database {
         }
     }
     
-    
+    //Tao matrix
+    public void createMatrix(){
+        int i, j;
+	for(i=1;i<=number_vertex;i++){
+            for(j=1;j<=number_vertex;j++){
+                matrix[i][j]=0;
+            }
+	}
+    }
     
     //Thuat toan Dijkstra 
     static int []mark = new int[MAX]; //danh dau dinh da xet - (1-da xet) (0-chua xet)
@@ -133,36 +145,20 @@ public class dijsktra_database {
 	}
     }
     
+    void getStartVertex_EndVertex(int start, int end){
+        startVertex = start;
+        endVertex = end;
+    }
     
-    public static void main(String[] args){
-        dijsktra_database map = new dijsktra_database();
-        
-        map.getNumberOfVertextAndEdge();
-        map.createMatrix();
-        map.getInfoFromFile();
-        
-        //In bang
-	int a, b; //Bien ho tro tao bang
-	for(a=1; a<=number_vertex; a++){
-            for(b=1;b<=number_vertex;b++){
-		System.out.print(matrix[a][b]+"           ");
-            }
-            System.out.print("\n");
-	}
-        
-        int start = 8;
-        int end = 4;
-        
-        map.Dijkstra(start);
-        
-        System.out.println(pi[end]+"   ");
-        
-        
-        
-        //Duong di
-	int []path=new int[MAX]; //luu cac dinh tren duong di
+    public void getDistance(){
+        MainMap map = new MainMap();
+    }
+    
+    //Duong di tu start -> end
+    public int []path=new int[MAX]; //luu cac dinh tren duong di
+    public void path(){
 	int k=0; //so dinh cua duong di
-	int current = end;
+	int current = endVertex;
 	
 	while(current != -1){
 		path[k] = current;
@@ -174,6 +170,39 @@ public class dijsktra_database {
 	for(r= k-1 ; r>=0 ; r--){
 		System.out.print(path[r]+"     ");
 	}
-        
     }
+    
+    public float run(){
+        getNumberOfVertex();
+        getNumberOfEdge();
+        createMatrix();
+        getInfoFromFile();
+        
+        //In bang
+	int a, b; //Bien ho tro tao bang
+	for(a=1; a<=number_vertex; a++){
+            for(b=1;b<=number_vertex;b++){
+		System.out.print(matrix[a][b]+"           ");
+            }
+            System.out.print("\n");
+	}
+        
+        
+        
+        Dijkstra(startVertex);
+        getDistance();
+//        System.out.println(pi[endVertex]+"   ");
+        
+        //Duong di
+	path();
+        
+
+
+        return pi[endVertex];
+    }
+    
+//    public void route(){
+//        MainMap map = new MainMap();
+//        map.getPath(path);
+//    }
 }

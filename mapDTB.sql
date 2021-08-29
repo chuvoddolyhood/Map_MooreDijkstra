@@ -197,7 +197,7 @@ UPDATE Vertex SET coordinates_x=699, coordinates_y=512 WHERE ID_vertex=14;
 
 
 --Get toa do tu name_vertex
-SELECT coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = 'Nha xe C1'
+SELECT ID_vertex, coordinates_x, coordinates_y FROM Vertex WHERE name_vertex = 'Cong A'
 
 
 
