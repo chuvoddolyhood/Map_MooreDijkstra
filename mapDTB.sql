@@ -98,9 +98,8 @@ INSERT INTO Edge VALUES (17, 'Duong truoc khoa Nong nghiep', 14, 13, 143.97, 1, 
 SELECT * FROM Vehicle;
 INSERT INTO Vehicle VALUES (1, 'Di bo', 5); --toc do trung binh
 INSERT INTO Vehicle VALUES (2, 'Xe dap', 15); --toc do khuyen cao
-INSERT INTO Vehicle VALUES (3, 'Xe may', 40); --toc do khuyen cao
-INSERT INTO Vehicle VALUES (4, 'Xe o to', 50); --toc do khuyen cao
-
+INSERT INTO Vehicle VALUES (3, 'Xe may', 25); --toc do khuyen cao
+INSERT INTO Vehicle VALUES (4, 'Xe o to', 30); --toc do khuyen cao
 
 --Vehicle_edge
 SELECT * FROM Vehicle_Edge
@@ -223,4 +222,7 @@ WHERE (ID_Vertex_1 = 2 OR ID_Vertex_2 = 2) AND (ID_Vertex_1 = 3 OR ID_Vertex_2 =
 
 
 
+SELECT * FROM Vehicle
+
+SELECT speed FROM Vehicle WHERE title_vehicle='Di bo';
 

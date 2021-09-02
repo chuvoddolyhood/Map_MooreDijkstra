@@ -77,6 +77,8 @@ public class MainMap extends javax.swing.JFrame {
         lblBicycle = new javax.swing.JLabel();
         lblMotobike = new javax.swing.JLabel();
         lblCar = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -133,8 +135,9 @@ public class MainMap extends javax.swing.JFrame {
 
         lblDistance.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblDistance.setForeground(new java.awt.Color(0, 0, 0));
-        lblDistance.setText("jLabel1");
+        lblDistance.setText("dis");
 
+        txtIntructionPath.setEditable(false);
         txtIntructionPath.setColumns(20);
         txtIntructionPath.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtIntructionPath.setRows(5);
@@ -162,7 +165,7 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
-        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_2.png"))); // NOI18N
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_choose.png"))); // NOI18N
         lblMotobike.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMotobike.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -205,27 +208,45 @@ public class MainMap extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Thời gian:");
+
+        lblTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTime.setForeground(new java.awt.Color(0, 0, 0));
+        lblTime.setText("time");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDistance)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnRun)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnClear)))
-                    .addComponent(jLabel1))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(btnRun)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnClear))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDistance)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblTime))))
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -241,9 +262,15 @@ public class MainMap extends javax.swing.JFrame {
                     .addComponent(btnClear)
                     .addComponent(btnRun))
                 .addGap(62, 62, 62)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDistance)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDistance))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTime)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(190, Short.MAX_VALUE))
@@ -324,23 +351,17 @@ public class MainMap extends javax.swing.JFrame {
         Moorse_Dijkstra md = new Moorse_Dijkstra();
         md.getStartVertex_EndVertex(idVertexStart, idVertexEnd);
         distance = md.run();
+        
+        //Set thong tin khoang cach
         setDistanceInLabel();
         
-//        drawPath();
+        //Ve duong tren map
+        drawPath();
 
-        System.out.print(j);
-        
-        int i;
-        for(i=0;i<j-2;i=i+2){
-            int j=i;
-            Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-            g.setStroke(new BasicStroke(5f));
-            g.setColor(Color.BLUE);
-            g.drawLine(coordinates_vertex_path[j], coordinates_vertex_path[j+1], 
-                    coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
-        }
-        
+        //Hien thi chi duong
         directPath();
+        
+        getTimeVehicle();
     }//GEN-LAST:event_btnRunActionPerformed
     
     
@@ -399,6 +420,8 @@ public class MainMap extends javax.swing.JFrame {
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
         lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+        
+        vehicle = "Di bo";
     }//GEN-LAST:event_lblWalkingMouseClicked
 
     private void lblBicycleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBicycleMouseClicked
@@ -406,6 +429,8 @@ public class MainMap extends javax.swing.JFrame {
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_choose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
         lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+        
+        vehicle = "Xe dap";
     }//GEN-LAST:event_lblBicycleMouseClicked
 
     private void lblMotobikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMotobikeMouseClicked
@@ -413,6 +438,8 @@ public class MainMap extends javax.swing.JFrame {
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_choose.png")));
         lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+        
+        vehicle = "Xe may";
     }//GEN-LAST:event_lblMotobikeMouseClicked
 
     private void lblCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarMouseClicked
@@ -420,6 +447,8 @@ public class MainMap extends javax.swing.JFrame {
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
         lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_choose.png")));
+        
+        vehicle = "Xe o to";
     }//GEN-LAST:event_lblCarMouseClicked
 
     
@@ -464,7 +493,7 @@ public class MainMap extends javax.swing.JFrame {
         getCoordinateOfPath();
     }
     
-    static int []coordinates_vertex_path = new int[200];
+    static int []coordinates_vertex_path = new int[200]; //Luu tru toa do (x,y)
     static int j=0; //Luu so luong toa do (x,y) cua cac dinh
     public void getCoordinateOfPath(){
         int i;
@@ -496,13 +525,16 @@ public class MainMap extends javax.swing.JFrame {
             System.out.print(coordinates_vertex_path[i]+"     ");
         }
         
-//        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-//            g.setStroke(new BasicStroke(5f));
-//            g.setColor(Color.BLUE);
-//        g.drawLine(1480, 650, 
-//                    1445, 619);
+        System.out.print("\nSo nut tren path= "+j+"\n");
         
-        
+        for(i=0;i<j-2;i=i+2){
+            int j=i;
+            Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+            g.setStroke(new BasicStroke(5f));
+            g.setColor(Color.BLUE);
+            g.drawLine(coordinates_vertex_path[j], coordinates_vertex_path[j+1], 
+                    coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
+        }
     }
     
     //In thong tin chi duong
@@ -561,6 +593,20 @@ public class MainMap extends javax.swing.JFrame {
         }
     }
     
+    private String vehicle = "Xe may"; //Mac dinh la xe may
+    void getTimeVehicle(){
+        int speed_km_h;
+        int speed_m_min;
+        Controller_Map controller = new Controller_Map();
+        controller.getVehicle(vehicle);
+        speed_km_h = controller.speedVehicle();
+        speed_m_min = speed_km_h * (100/6); //Chuyen km/h -> m/min
+        int time = (int) (distance/speed_m_min);
+        lblTime.setText(time + " phút");
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -604,6 +650,7 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -613,6 +660,7 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JLabel lblCar;
     private javax.swing.JLabel lblDistance;
     private javax.swing.JLabel lblMotobike;
+    private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblWalking;
     private javax.swing.JTextArea txtIntructionPath;
     // End of variables declaration//GEN-END:variables

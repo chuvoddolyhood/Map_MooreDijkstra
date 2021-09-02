@@ -113,6 +113,32 @@ public class Controller_Map {
     }
     
     
+    //Nhan du lieu Vehicle
+    String vehicle;
+    void getVehicle(String vehicle){
+        this.vehicle = vehicle;
+    }
     
+    int speedVehicle(){
+        int speed=0;
+        try{
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Map; user=test; password=1234567890";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String queryFindPass="SELECT speed FROM Vehicle WHERE title_vehicle=?;";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(queryFindPass);
+            ps.setString(1, vehicle);
+
+            ResultSet rs=ps.executeQuery();
+
+            if(rs.next()){
+                    speed = rs.getInt("speed");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        return speed;
+    }
     
 }
