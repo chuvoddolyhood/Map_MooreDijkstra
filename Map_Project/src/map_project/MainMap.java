@@ -316,7 +316,7 @@ public class MainMap extends javax.swing.JFrame {
 
     //set icon img
     private void setIconImage(){
-//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\icons8_marker_40px_2.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/photo/icons8_marker_40px_3.png")));
     }
     
     //Chay thuat toan Dijkstra
@@ -373,9 +373,12 @@ public class MainMap extends javax.swing.JFrame {
         coordinateY_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(" ")+1));
         
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-        g.setColor(Color.red);
-        g.setStroke(new BasicStroke(10f));
-        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
+        Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/photo/icons8_marker_40px_3.png"));
+        g.drawImage(img1, coordinateX_vertexEnd-20, coordinateY_vertexEnd-40, this);
+        
+//        g.setColor(Color.red);
+//        g.setStroke(new BasicStroke(10f));
+//        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
 //        g.fillOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 25, 25);
 
 //        g.drawLine(coordinateX_vertexStart, coordinateY_vertexStart, coordinateX_vertexEnd, coordinateY_vertexEnd);
