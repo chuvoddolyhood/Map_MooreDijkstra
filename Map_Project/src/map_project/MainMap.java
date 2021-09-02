@@ -35,7 +35,7 @@ public class MainMap extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         //Set icon image in frame
-//        setIconImage();
+        setIconImage();
         
         //Xu ly hinh anh
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
@@ -71,17 +71,29 @@ public class MainMap extends javax.swing.JFrame {
         lblDistance = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtIntructionPath = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lblWalking = new javax.swing.JLabel();
+        lblBicycle = new javax.swing.JLabel();
+        lblMotobike = new javax.swing.JLabel();
+        lblCar = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Map");
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1920, 1080));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(253, 239, 239));
 
         jLabel2.setText("jLabel2");
 
+        jPanel2.setBackground(new java.awt.Color(245, 232, 199));
+
+        cmbStart.setBackground(new java.awt.Color(111, 76, 91));
+        cmbStart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbStart.setForeground(new java.awt.Color(255, 255, 255));
         cmbStart.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +101,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        cmbEnd.setBackground(new java.awt.Color(111, 76, 91));
+        cmbEnd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbEnd.setForeground(new java.awt.Color(255, 255, 255));
         cmbEnd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +111,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        btnRun.setBackground(new java.awt.Color(111, 76, 91));
+        btnRun.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRun.setForeground(new java.awt.Color(255, 255, 255));
         btnRun.setText("Run");
         btnRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +121,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(111, 76, 91));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,62 +131,145 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        lblDistance.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblDistance.setForeground(new java.awt.Color(0, 0, 0));
         lblDistance.setText("jLabel1");
 
         txtIntructionPath.setColumns(20);
+        txtIntructionPath.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtIntructionPath.setRows(5);
         jScrollPane1.setViewportView(txtIntructionPath);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Khoảng cách:");
+
+        jPanel4.setBackground(new java.awt.Color(222, 186, 157));
+
+        lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_2.png"))); // NOI18N
+        lblWalking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblWalking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblWalkingMouseClicked(evt);
+            }
+        });
+
+        lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_4.png"))); // NOI18N
+        lblBicycle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBicycle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBicycleMouseClicked(evt);
+            }
+        });
+
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_2.png"))); // NOI18N
+        lblMotobike.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMotobike.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMotobikeMouseClicked(evt);
+            }
+        });
+
+        lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_6.png"))); // NOI18N
+        lblCar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lblWalking)
+                .addGap(18, 18, 18)
+                .addComponent(lblBicycle)
+                .addGap(18, 18, 18)
+                .addComponent(lblMotobike)
+                .addGap(18, 18, 18)
+                .addComponent(lblCar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblMotobike, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                    .addComponent(lblBicycle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblWalking))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDistance)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(btnRun)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnClear))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(lblDistance)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnRun)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClear)))
+                    .addComponent(jLabel1))
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRun)
-                    .addComponent(btnClear))
-                .addGap(154, 154, 154)
+                    .addComponent(btnClear)
+                    .addComponent(btnRun))
+                .addGap(62, 62, 62)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblDistance)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
+
+        jPanel3.setBackground(new java.awt.Color(245, 232, 199));
+
+        jLabel3.setFont(new java.awt.Font("Onyx", 0, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(92, 61, 46));
+        jLabel3.setText("chuhood.map");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(733, 733, 733)
+                .addComponent(jLabel3)
+                .addContainerGap(834, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 71, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -175,13 +279,13 @@ public class MainMap extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 1562, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,9 +295,9 @@ public class MainMap extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,9 +315,9 @@ public class MainMap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //set icon img
-//    private void setIconImage(){
-//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8_marker_40px.png")));
-//    }
+    private void setIconImage(){
+//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\icons8_marker_40px_2.png")));
+    }
     
     //Chay thuat toan Dijkstra
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
@@ -286,6 +390,34 @@ public class MainMap extends javax.swing.JFrame {
         cmbStart.setSelectedIndex(1);
         cmbEnd.setSelectedIndex(1);
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void lblWalkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWalkingMouseClicked
+        lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_choose.png")));
+        lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
+        lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+    }//GEN-LAST:event_lblWalkingMouseClicked
+
+    private void lblBicycleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBicycleMouseClicked
+        lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
+        lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_choose.png")));
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
+        lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+    }//GEN-LAST:event_lblBicycleMouseClicked
+
+    private void lblMotobikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMotobikeMouseClicked
+        lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
+        lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_choose.png")));
+        lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_unchoose.png")));
+    }//GEN-LAST:event_lblMotobikeMouseClicked
+
+    private void lblCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarMouseClicked
+        lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
+        lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
+        lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
+        lblCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_car_40px_choose.png")));
+    }//GEN-LAST:event_lblCarMouseClicked
 
     
     private void uploadInfoVertexFromDTB(){
@@ -372,7 +504,6 @@ public class MainMap extends javax.swing.JFrame {
     
     //In thong tin chi duong
     void directPath(){
-        txtIntructionPath.append((distance)+" m");
         int i; // bien ho tro loop
         int start = 0; //Diem bat dau
         int end = 0; //diem ket thuc
@@ -467,12 +598,19 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JButton btnRun;
     private javax.swing.JComboBox<String> cmbEnd;
     private javax.swing.JComboBox<String> cmbStart;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBicycle;
+    private javax.swing.JLabel lblCar;
     private javax.swing.JLabel lblDistance;
+    private javax.swing.JLabel lblMotobike;
+    private javax.swing.JLabel lblWalking;
     private javax.swing.JTextArea txtIntructionPath;
     // End of variables declaration//GEN-END:variables
 }
