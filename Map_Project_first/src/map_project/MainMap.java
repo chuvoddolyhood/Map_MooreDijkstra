@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -35,7 +36,7 @@ public class MainMap extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         //Set icon image in frame
-//        setIconImage();
+        setIconImage();
         
         //Xu ly hinh anh
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
@@ -71,17 +72,24 @@ public class MainMap extends javax.swing.JFrame {
         lblDistance = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtIntructionPath = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Map");
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1920, 1080));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(247, 246, 242));
 
         jLabel2.setText("jLabel2");
 
+        jPanel2.setBackground(new java.awt.Color(245, 232, 199));
+
+        cmbStart.setBackground(new java.awt.Color(111, 76, 91));
+        cmbStart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbStart.setForeground(new java.awt.Color(0, 0, 0));
         cmbStart.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +97,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        cmbEnd.setBackground(new java.awt.Color(111, 76, 91));
+        cmbEnd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbEnd.setForeground(new java.awt.Color(0, 0, 0));
         cmbEnd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +107,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        btnRun.setBackground(new java.awt.Color(111, 76, 91));
+        btnRun.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRun.setForeground(new java.awt.Color(255, 255, 255));
         btnRun.setText("Run");
         btnRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +117,9 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(111, 76, 91));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,62 +127,78 @@ public class MainMap extends javax.swing.JFrame {
             }
         });
 
-        lblDistance.setText("jLabel1");
+        lblDistance.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblDistance.setForeground(new java.awt.Color(0, 0, 0));
 
+        txtIntructionPath.setBackground(new java.awt.Color(245, 232, 199));
         txtIntructionPath.setColumns(20);
+        txtIntructionPath.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtIntructionPath.setRows(5);
         jScrollPane1.setViewportView(txtIntructionPath);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Khoảng cách:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDistance)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(btnRun)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnClear))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnRun)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClear)))
+                    .addComponent(lblDistance))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(130, 130, 130)
                 .addComponent(cmbStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(43, 43, 43)
                 .addComponent(cmbEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRun)
                     .addComponent(btnClear))
-                .addGap(154, 154, 154)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDistance)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
+
+        jPanel3.setBackground(new java.awt.Color(245, 232, 199));
+
+        jLabel1.setFont(new java.awt.Font("Onyx", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(92, 61, 46));
+        jLabel1.setText("Chuhood.Map");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(706, 706, 706))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 71, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -191,9 +224,9 @@ public class MainMap extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,9 +244,9 @@ public class MainMap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //set icon img
-//    private void setIconImage(){
-//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8_marker_40px.png")));
-//    }
+    private void setIconImage(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8_marker_40px.png")));
+    }
     
     //Chay thuat toan Dijkstra
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
@@ -227,7 +260,7 @@ public class MainMap extends javax.swing.JFrame {
         System.out.print(j);
         
         int i;
-        for(i=0;i<j-2;i=i+2){
+        for(i=0; i<j-2; i=i+2){
             int j=i;
             Graphics2D g = (Graphics2D) jLabel2.getGraphics();
             g.setStroke(new BasicStroke(5f));
@@ -236,7 +269,8 @@ public class MainMap extends javax.swing.JFrame {
                     coordinates_vertex_path[j+2], coordinates_vertex_path[j+3]);
         }
         
-        directPath();
+        
+//        directPath();
     }//GEN-LAST:event_btnRunActionPerformed
     
     
@@ -269,9 +303,12 @@ public class MainMap extends javax.swing.JFrame {
         coordinateY_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(" ")+1));
         
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-        g.setColor(Color.red);
-        g.setStroke(new BasicStroke(10f));
-        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
+        Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8_marker_40px.png"));
+        g.drawImage(img1, coordinateX_vertexEnd-20, coordinateY_vertexEnd-40, this);
+        
+//        g.setColor(Color.MAGENTA);
+//        g.setStroke(new BasicStroke(10f));
+//        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
 //        g.fillOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 25, 25);
 
 //        g.drawLine(coordinateX_vertexStart, coordinateY_vertexStart, coordinateX_vertexEnd, coordinateY_vertexEnd);
@@ -283,8 +320,9 @@ public class MainMap extends javax.swing.JFrame {
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
                 .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setText("");
-        cmbStart.setSelectedIndex(1);
-        cmbEnd.setSelectedIndex(1);
+        cmbStart.setSelectedIndex(0);
+        cmbEnd.setSelectedIndex(0);
+        Arrays.fill(coordinates_vertex_path, 0);
     }//GEN-LAST:event_btnClearActionPerformed
 
     
@@ -313,8 +351,8 @@ public class MainMap extends javax.swing.JFrame {
     }
     
     
-    static int []path_vertex = new int[200]; //Duong di qua cac nut
-    static int number_vertex_path; //So nut tren duong di path
+    static int []path_vertex = new int[200]; //Mang luu tru diem(vertex). Duong di qua cac nut
+    static int number_vertex_path; //So nut
     //Lay duong di
     public void getPath(int []path, int number_vertex_path){
         this.number_vertex_path= number_vertex_path;
@@ -329,8 +367,10 @@ public class MainMap extends javax.swing.JFrame {
         getCoordinateOfPath();
     }
     
-    static int []coordinates_vertex_path = new int[200];
-    static int j=0; //Luu so luong toa do (x,y) cua cac dinh
+    
+    /*Lúc đầu ko đọc được giá trị j và mảng coordinates_vertex_path. Lúc sau đọc được*/
+    static int []coordinates_vertex_path = new int[200]; //Mang luu tru gia tri X va Y cua diem(vertex)
+    static int j=0; //Luu so luong toa do (x va y) cua cac dinh
     public void getCoordinateOfPath(){
         int i;
         for(i=number_vertex_path-1;i>=0;i--){
@@ -370,9 +410,9 @@ public class MainMap extends javax.swing.JFrame {
         
     }
     
+    /*
     //In thong tin chi duong
     void directPath(){
-        txtIntructionPath.append((distance)+" m");
         int i; // bien ho tro loop
         int start = 0; //Diem bat dau
         int end = 0; //diem ket thuc
@@ -421,12 +461,12 @@ public class MainMap extends javax.swing.JFrame {
             if(two_way_edge==1)
                 title_two_way = "đường hai chiều";
             else title_two_way = "đường một chiều";
-        
+            
 //            System.out.println("Từ "+title_startVertex+", đến "+title_endVertex+", trên "+title_edge+", khoang "+distance_edge+" km. Đây là "+title_two_way);
             txtIntructionPath.append("Từ "+title_startVertex+", đến "+title_endVertex+", trên "+title_edge+", khoang "+distance_edge+" m. Đây là "+title_two_way+"\n");
         }
     }
-    
+    */
     /**
      * @param args the command line arguments
      */
@@ -467,7 +507,9 @@ public class MainMap extends javax.swing.JFrame {
     private javax.swing.JButton btnRun;
     private javax.swing.JComboBox<String> cmbEnd;
     private javax.swing.JComboBox<String> cmbStart;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

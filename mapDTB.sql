@@ -207,7 +207,19 @@ SELECT COUNT(*) AS so_dinh FROM Vertex;
 
 
 --Lay toa do tu ID_vertex
-SELECT coordinates_x, coordinates_y FROM Vertex WHERE ID_vertex=8
+SELECT coordinates_x, coordinates_y FROM Vertex WHERE ID_vertex=7
+
+
+
+SELECT * FROM Edge
+SELECT * FROM Vertex
+
+SELECT (SELECT name_vertex FROM Vertex WHERE ID_Vertex = 2) AS startVertex, 
+	(SELECT name_vertex FROM Vertex WHERE ID_Vertex = 3) AS endVertex,
+	E.name_edge, E.distance, E.two_way 
+FROM Edge E JOIN Vertex V ON E.ID_Vertex_1=V.ID_Vertex 
+WHERE (ID_Vertex_1 = 2 OR ID_Vertex_2 = 2) AND (ID_Vertex_1 = 3 OR ID_Vertex_2 = 3);
+
 
 
 
