@@ -46,9 +46,6 @@ public class MainMap extends javax.swing.JFrame {
         //Load thong tin diem noi bat
         uploadInfoVertexFromDTB();
         
-        //Lay thong tin so dinh, so cung
-//        getNumberOfVertextAndEdge();
-        
         
     }
 
