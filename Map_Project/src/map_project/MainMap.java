@@ -272,8 +272,8 @@ public class MainMap extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTime)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(245, 232, 199));
@@ -411,8 +411,16 @@ public class MainMap extends javax.swing.JFrame {
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
                 .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setText("");
-        cmbStart.setSelectedIndex(1);
-        cmbEnd.setSelectedIndex(1);
+        cmbStart.setSelectedIndex(0);
+        cmbEnd.setSelectedIndex(0);
+//        txtIntructionPath.setText("");
+//        lblDistance.setText("");
+//        lblTime.setText("");
+        j=0; //set gia tri danh sach toa do XY trong mang
+        int i;
+        for(i=0;i<number_vertex_path;i++){
+            path_vertex[i]=0;
+        }
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void lblWalkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWalkingMouseClicked
@@ -498,7 +506,7 @@ public class MainMap extends javax.swing.JFrame {
     public void getCoordinateOfPath(){
         int i;
         for(i=number_vertex_path-1;i>=0;i--){
-            System.out.print(path_vertex[i]+"    ");
+            System.out.print(path_vertex[i]+"    "+ i+"     ");
             
             
             Controller_Map map = new Controller_Map();
@@ -510,13 +518,10 @@ public class MainMap extends javax.swing.JFrame {
             int coordinateY_vertex_Path = Integer.parseInt(coordinateXY_Path.substring(coordinateXY_Path.lastIndexOf(" ")+1));
             System.out.println(coordinateX_vertex_Path+"<>"+coordinateY_vertex_Path);
             
-
+            
             coordinates_vertex_path[j++] = coordinateX_vertex_Path;
-            coordinates_vertex_path[j++] = coordinateY_vertex_Path;
+            coordinates_vertex_path[j++] = coordinateY_vertex_Path;           
         }
-        
-        drawPath();
-        
     }
     
     void drawPath(){
@@ -589,7 +594,7 @@ public class MainMap extends javax.swing.JFrame {
             else title_two_way = "đường một chiều";
         
 //            System.out.println("Từ "+title_startVertex+", đến "+title_endVertex+", trên "+title_edge+", khoang "+distance_edge+" km. Đây là "+title_two_way);
-            txtIntructionPath.append("Từ "+title_startVertex+", đến "+title_endVertex+", trên "+title_edge+", khoang "+distance_edge+" m. Đây là "+title_two_way+"\n");
+            txtIntructionPath.append("- Từ "+title_startVertex+",\n đến "+title_endVertex+",\n trên "+title_edge+",\n khoang "+distance_edge+" m. \nĐây là "+title_two_way+"\n");
         }
     }
     
