@@ -407,15 +407,15 @@ public class MainMap extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEndActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtIntructionPath.setText("");
+        lblDistance.setText("dis");
+        lblTime.setText("time");
         jLabel2.setIcon(new ImageIcon(new ImageIcon("").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
                 .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
         jLabel2.setText("");
         cmbStart.setSelectedIndex(0);
         cmbEnd.setSelectedIndex(0);
-//        txtIntructionPath.setText("");
-//        lblDistance.setText("");
-//        lblTime.setText("");
         j=0; //set gia tri danh sach toa do XY trong mang
         int i;
         for(i=0;i<number_vertex_path;i++){
