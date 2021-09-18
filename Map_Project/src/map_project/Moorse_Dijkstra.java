@@ -66,7 +66,7 @@ public class Moorse_Dijkstra {
     public void getInfoFromFile(){
         int vertex_1 = 0; //Nut 1
         int vertex_2 = 0; //Nut 2
-        float distance = 0f; //Khoang cach
+        float distance = 0.2f; //Khoang cach
         int two_way; //kiem tra duong 2 chieu
         
         try{
@@ -197,7 +197,7 @@ public class Moorse_Dijkstra {
         
         Dijkstra(startVertex);
         getDistance();
-//        System.out.println(pi[endVertex]+"   ");
+//        System.out.println("Distance= "+pi[endVertex]+"   ");
         
         //Duong di
 	path();
