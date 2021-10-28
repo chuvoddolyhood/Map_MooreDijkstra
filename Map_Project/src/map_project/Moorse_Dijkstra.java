@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  * @author Tran Nhan Nghia
  */
 public class Moorse_Dijkstra {
-    private static final int MAX = 100;
+    private static final int MAX = 300;
     private static final float INFINITY = 999999f;
     static int number_edge = 0; //so cung 
     static int number_vertex = 0; //so dinh

@@ -18,6 +18,7 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -361,24 +362,55 @@ public class MainMap extends javax.swing.JFrame {
     }
     
     //Chay thuat toan Dijkstra
+    int check_run=0;
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        Moorse_Dijkstra md = new Moorse_Dijkstra();
-        md.getStartVertex_EndVertex(idVertexStart, idVertexEnd);
-        distance = md.run();
-        
-        //Set thong tin khoang cach
-        setDistanceInLabel();
-        
-        //Ve duong tren map
-        drawPath();
+        if(cmbStart.getItemAt(cmbStart.getSelectedIndex()).equals("Nha xe C1") && 
+                cmbEnd.getItemAt(cmbEnd.getSelectedIndex()).equals("Nha xe C1")){
+            JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn điểm xuất phát và đến trước khi bấm nút Run");
+        } else {
+            check_run=1;
+            Moorse_Dijkstra md = new Moorse_Dijkstra();
+            md.getStartVertex_EndVertex(idVertexStart, idVertexEnd);
+            distance = md.run();
 
-        //Hien thi chi duong
-        directPath();
-        
-        getTimeVehicle();
+            //Set thong tin khoang cach
+            setDistanceInLabel();
+
+            //Ve diem bat dau va ket thuc tren map
+            drawStart();
+            drawEnd();
+
+            //Ve duong tren map
+            drawPath();
+
+            //Hien thi chi duong
+            directPath();
+
+            //Hien thoi gian di chuyen
+            getTimeVehicle();    
+        }
     }//GEN-LAST:event_btnRunActionPerformed
     
-    
+    //kiem tra Thuat toan da chay lan nao chua. Neu chay roi thi check_run=1 va reset lai ban do
+    void checkRun(){
+        if(check_run==1){
+            //reset map
+            check_run=0;
+            txtIntructionPath.setText("");
+            lblDistance.setText("dis");
+            lblTime.setText("time");
+            jLabel2.setIcon(new ImageIcon(new ImageIcon("").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
+            jLabel2.setIcon(new ImageIcon(new ImageIcon("F:\\Programming\\App\\Map_MooreDijkstra\\photo\\map1.png").getImage()
+                    .getScaledInstance(1600, 900, Image.SCALE_DEFAULT)));
+            jLabel2.setText("");
+            j=0; //set gia tri danh sach toa do XY trong mang
+            int i;
+            for(i=0;i<number_vertex_path;i++){
+                path_vertex[i]=0;
+            }
+            
+        } 
+    }
 
     int idVertexStart, idVertexEnd; //id 2 diem
     int coordinateX_vertexStart, coordinateY_vertexStart; //Toa do diem bat dau
@@ -386,40 +418,49 @@ public class MainMap extends javax.swing.JFrame {
     float distance; //Duong di ngan nhat 2 diem
     
     private void cmbStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStartActionPerformed
+        checkRun();
         Controller_Map map = new Controller_Map();
         map.getInfoVertexStartFromComboBox(cmbStart.getItemAt(cmbStart.getSelectedIndex()));
         String coordinateXY_vertexStart = map.outputCoordinateVertexStart();
         idVertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(0, coordinateXY_vertexStart.lastIndexOf(":")));
         coordinateX_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(coordinateXY_vertexStart.lastIndexOf(":")+1, coordinateXY_vertexStart.lastIndexOf(" ")));
         coordinateY_vertexStart = Integer.parseInt(coordinateXY_vertexStart.substring(coordinateXY_vertexStart.lastIndexOf(" ")+1));
-        
+        drawStart();
+    }//GEN-LAST:event_cmbStartActionPerformed
+    
+    //Ve diem bat dau
+    void drawStart(){
         Graphics2D g = (Graphics2D) jLabel2.getGraphics();
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(10f));
         g.drawOval(coordinateX_vertexStart, coordinateY_vertexStart, 10, 10);
-    }//GEN-LAST:event_cmbStartActionPerformed
+    }
     
     private void cmbEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEndActionPerformed
+        checkRun();
         Controller_Map map = new Controller_Map();
         map.getInfoVertexEndFromComboBox(cmbEnd.getItemAt(cmbEnd.getSelectedIndex()));
         String coordinateXY_vertexEnd = map.outputCoordinateVertexEnd();
         idVertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(0, coordinateXY_vertexEnd.lastIndexOf(":")));
         coordinateX_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(":")+1, coordinateXY_vertexEnd.lastIndexOf(" ")));
         coordinateY_vertexEnd = Integer.parseInt(coordinateXY_vertexEnd.substring(coordinateXY_vertexEnd.lastIndexOf(" ")+1));
-        
-        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
-        Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/photo/icons8_marker_40px_3.png"));
-        g.drawImage(img1, coordinateX_vertexEnd-20, coordinateY_vertexEnd-40, this);
+        drawEnd();
         
 //        g.setColor(Color.red);
 //        g.setStroke(new BasicStroke(10f));
 //        g.drawOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 10, 10);
 //        g.fillOval(coordinateX_vertexEnd, coordinateY_vertexEnd, 25, 25);
-
 //        g.drawLine(coordinateX_vertexStart, coordinateY_vertexStart, coordinateX_vertexEnd, coordinateY_vertexEnd);
         
     }//GEN-LAST:event_cmbEndActionPerformed
 
+    //Ve diem ket thuc
+    void drawEnd(){
+        Graphics2D g = (Graphics2D) jLabel2.getGraphics();
+        Image img1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/photo/icons8_marker_40px_3.png"));
+        g.drawImage(img1, coordinateX_vertexEnd-20, coordinateY_vertexEnd-40, this);
+    }
+    
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtIntructionPath.setText("");
         lblDistance.setText("dis");
@@ -439,6 +480,7 @@ public class MainMap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void lblWalkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWalkingMouseClicked
+        checkRun();
         lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_choose.png")));
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
@@ -448,6 +490,7 @@ public class MainMap extends javax.swing.JFrame {
     }//GEN-LAST:event_lblWalkingMouseClicked
 
     private void lblBicycleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBicycleMouseClicked
+        checkRun();
         lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_choose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
@@ -457,6 +500,7 @@ public class MainMap extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBicycleMouseClicked
 
     private void lblMotobikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMotobikeMouseClicked
+        checkRun();
         lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_choose.png")));
@@ -476,6 +520,7 @@ public class MainMap extends javax.swing.JFrame {
     }
     
     private void lblCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarMouseClicked
+        checkRun();
         lblWalking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_walking_40px_unchoose.png")));
         lblBicycle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_bicycle_40px_unchoose.png")));
         lblMotobike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/icons8_motorcycle_40px_unchoose.png")));
@@ -506,7 +551,7 @@ public class MainMap extends javax.swing.JFrame {
     
   
     void setDistanceInLabel(){
-        lblDistance.setText(String.valueOf(distance)+" m");
+        lblDistance.setText(String.valueOf((int)distance)+" m");
     }
     
     
@@ -631,8 +676,14 @@ public class MainMap extends javax.swing.JFrame {
         controller.getVehicle(vehicle);
         speed_km_h = controller.speedVehicle();
         speed_m_min = speed_km_h * (100/6); //Chuyen km/h -> m/min
-        int time = (int) (distance/speed_m_min);
-        lblTime.setText(time + " phút");
+        float time = distance/speed_m_min; //phut
+
+        //Xu ly hien thi giay hoac phut 
+        if(time<1){
+            lblTime.setText((int)(time*60) + " giây");
+        } else {
+            lblTime.setText((int)time + " phút");
+        }
     }
     
     
